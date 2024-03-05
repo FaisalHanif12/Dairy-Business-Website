@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import {
 	Brand,
 	BrandImage,
@@ -13,22 +12,30 @@ import {
 	MobileMenuHover,
 } from './NavbarStyle';
 import { NavbarData } from './NavbarData';
-
 export default function Navbar() {
 	const screenSize = 580;
 	const [menu, setMenu] = useState(false);
 	const [toggleMenu, setToggleMenu] = useState(false);
 
-	window.addEventListener('resize', (e) => {
-		if (e.target.innerWidth < screenSize) {
-			setMenu(true);
-		} else {
-			setMenu(false);
-		}
-	});
+	// Close menu function
+	const closeMenu = () => {
+		setToggleMenu(false);
+	};
 
 	useEffect(() => {
-		if (window.innerWidth < screenSize) setMenu(true);
+		const handleResize = () => {
+			if (window.innerWidth < screenSize) setMenu(true);
+			else setMenu(false);
+		}
+
+		// Attach the event listener
+		window.addEventListener('resize', handleResize);
+
+		// Call the handler right away so state gets updated with initial window size
+		handleResize();
+
+		// Remove event listener on cleanup
+		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
 	return (
@@ -36,7 +43,16 @@ export default function Navbar() {
 			<Nav>
 				<Container ss={screenSize}>
 					<Brand>
-						<BrandImage src={logo} alt="logo" />
+						<h4 style={{
+							fontFamily: "'Dancing Script', cursive", // Stylish font
+							fontSize: '1em', // Font size
+							color: 'white', // Color of the text
+							textAlign: 'center', // Center align text
+							margin: '0', // Remove default margin
+							textShadow: '2px 2px 4px rgba(0,0,0,0.3)', // Text shadow for depth
+
+						}}>Maher Dairy Farm</h4>
+
 					</Brand>
 					<MobileMenuContainer
 						menu={menu}
@@ -47,7 +63,7 @@ export default function Navbar() {
 					</MobileMenuContainer>
 					<Menu toggleMenu={toggleMenu} ss={screenSize}>
 						{NavbarData.map((item, index) => (
-							<MenuItems key={index} toggleMenu={toggleMenu} ss={screenSize}>
+							<MenuItems key={index} toggleMenu={toggleMenu} ss={screenSize} onClick={closeMenu}>
 								<NavLink to={item.link}>{item.title}</NavLink>
 							</MenuItems>
 						))}

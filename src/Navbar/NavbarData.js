@@ -4,15 +4,23 @@ export const NavbarData = [
 		link: '/',
 	},
 	{
-		title: 'Services',
+		title: 'Consumers Sales',
 		link: '/services',
 	},
 	{
-		title: 'About',
+		title: 'Relatives Khata',
 		link: '/about',
 	},
 	{
-		title: 'Contact',
+		title: 'Consumer khata',
 		link: '/contact',
+	},
+	{
+		title: 'Expenditure',
+		link: '/expenditure',
+	},
+	{
+		title: 'Employee',
+		link: '/employee',
 	},
 ];
