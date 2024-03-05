@@ -1,4 +1,4 @@
-# React Responsive Navbar Reuseable Component
+# Dairy Business Website 
 
 This react navbar component is build using **styled-component**
 
